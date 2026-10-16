@@ -1,7 +1,7 @@
 // Pruebas "generadas por un asistente de IA" para web/src/descuentos.ts.
 // Copia este archivo a web/src/ de descuentos-app. NO lo corrijas a mano al leerlo: primero ejecútalo.
 import { describe, expect, it } from 'vitest'
-import {formatearBs, validar } from './descuentos'
+import { formatearBs, validar } from './descuentos'
 
 describe('validar', () => {
   it('acepta un precio y un porcentaje validos', () => {
@@ -31,4 +31,3 @@ describe('formatearBs', () => {
     expect(formatearBs(valor)).toBe('Bs 1234,50')
   })
 })
-
