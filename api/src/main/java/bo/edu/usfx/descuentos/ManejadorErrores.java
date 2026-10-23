@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import java.util.Map;
 
@@ -29,6 +30,12 @@ public class ManejadorErrores {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleReglaNegocio(IllegalArgumentException ex) {
         return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
+    }
+
+    // Nuevo manejador para respetar los códigos HTTP 401 y 403 del AdminController
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<?> handleResponseStatus(ResponseStatusException ex) {
+        return ResponseEntity.status(ex.getStatusCode()).body(Map.of("error", ex.getReason()));
     }
 
     @ExceptionHandler(Exception.class)
